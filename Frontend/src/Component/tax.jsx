@@ -179,7 +179,6 @@ function Tax() {
                             style={{
                               cursor: "pointer",
                               marginLeft: "8px",
-                              color: "red",
                             }}
                             onClick={() => handleDelete(tax._id)}
                           />
