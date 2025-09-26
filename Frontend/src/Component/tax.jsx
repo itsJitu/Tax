@@ -81,6 +81,18 @@ function Tax() {
     setShowModal(true);
   };
 
+  // Delete tax====================================================
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this tax?")) {
+      try {
+        await axios.delete(`${API_URL}/${id}`);
+        fetchTaxes(); // refresh list after delete
+      } catch (error) {
+        console.error("Error deleting tax:", error);
+      }
+    }
+  };
+
   return (
     <div className="page-wrapper">
       <div className="content">
@@ -164,7 +176,12 @@ function Tax() {
                             onClick={() => openEditModal(tax)}
                           />
                           <TbTrash
-                            style={{ cursor: "pointer", marginLeft: "8px" }}
+                            style={{
+                              cursor: "pointer",
+                              marginLeft: "8px",
+                              color: "red",
+                            }}
+                            onClick={() => handleDelete(tax._id)}
                           />
                         </td>
                       </tr>
@@ -223,7 +240,7 @@ function Tax() {
             <div className="modal-container">
               <div className="modal-header">
                 <h5>{isEditing ? "Edit Tax" : "Add Tax"}</h5>
-                <button
+                {/* <button
                   onClick={() => setShowModal(false)}
                   style={{
                     border: "none",
@@ -232,7 +249,7 @@ function Tax() {
                   }}
                 >
                   ✖
-                </button>
+                </button> */}
               </div>
               <div className="modal-body">
                 <form onSubmit={handleSubmit}>
